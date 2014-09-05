@@ -30,23 +30,31 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
-import org.wso2.carbon.identity.application.common.model.IdentityProvider;
 import org.wso2.carbon.identity.application.common.model.ServiceProvider;
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.application.mgt.ApplicationMgtSystemConfig;
 import org.wso2.carbon.registry.core.service.RegistryService;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.carbon.utils.CarbonUtils;
+import org.wso2.carbon.utils.ConfigurationContextService;
 
 /**
- * @scr.component name="identity.application.management.component" immediate="true"
+ * @scr.component name="identity.application.management.component"
+ *                immediate="true"
  * @scr.reference name="registry.service"
  *                interface="org.wso2.carbon.registry.core.service.RegistryService"
  *                cardinality="1..1" policy="dynamic" bind="setRegistryService"
  *                unbind="unsetRegistryService"
  * @scr.reference name="user.realmservice.default"
- *                interface="org.wso2.carbon.user.core.service.RealmService" cardinality="1..1"
- *                policy="dynamic" bind="setRealmService" unbind="unsetRealmService"
+ *                interface="org.wso2.carbon.user.core.service.RealmService"
+ *                cardinality="1..1" policy="dynamic" bind="setRealmService"
+ *                unbind="unsetRealmService"
+ * 
+ * @scr.reference name="configuration.context.service"
+ *                interface="org.wso2.carbon.utils.ConfigurationContextService"
+ *                cardinality="1..1" policy="dynamic"
+ *                bind="setConfigurationContextService"
+ *                unbind="unsetConfigurationContextService"
  */
 public class ApplicationManagementServiceComponent {
     private static Log log = LogFactory.getLog(ApplicationManagementServiceComponent.class);
@@ -95,6 +103,21 @@ public class ApplicationManagementServiceComponent {
             log.info("Unsetting the Realm Service");
         }
         ApplicationManagementServiceComponentHolder.setRealmService(null);
+    }
+    
+    
+    protected void setConfigurationContextService(ConfigurationContextService configContextService) {
+        if (log.isDebugEnabled()) {
+            log.info("Setting the Configuration Context Service");
+        }
+        ApplicationManagementServiceComponentHolder.setConfigContextService(configContextService);
+    }
+    
+    protected void unsetConfigurationContextService(ConfigurationContextService configContextService) {
+        if (log.isDebugEnabled()) {
+            log.info("Unsetting the Configuration Context Service");
+        }
+        ApplicationManagementServiceComponentHolder.setConfigContextService(null);
     }
 
     private void buidFileBasedSPList() {
