@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.ComponentContext;
 import org.wso2.carbon.identity.application.common.model.ServiceProvider;
+import org.wso2.carbon.identity.application.mgt.ApplicationManagementOSGIService;
 import org.wso2.carbon.identity.application.mgt.ApplicationManagementService;
 import org.wso2.carbon.identity.application.mgt.ApplicationMgtSystemConfig;
 import org.wso2.carbon.registry.core.service.RegistryService;
@@ -66,6 +67,8 @@ public class ApplicationManagementServiceComponent {
         bundleContext = context.getBundleContext();
         bundleContext.registerService(ApplicationManagementService.class.getName(),
                 new ApplicationManagementService(), null);
+        bundleContext.registerService(ApplicationManagementOSGIService.class.getName(),
+                new ApplicationManagementOSGIService(), null);
         ApplicationMgtSystemConfig.getInstance();
         buidFileBasedSPList();
         log.info("Identity ApplicationManagementComponent bundle is activated");

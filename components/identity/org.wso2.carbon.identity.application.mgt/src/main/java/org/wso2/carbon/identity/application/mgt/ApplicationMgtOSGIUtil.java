@@ -192,7 +192,9 @@ public class ApplicationMgtOSGIUtil {
             throws IdentityApplicationManagementException {
         
         try {
-        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry();
+        	String userName = CarbonContext.getThreadLocalCarbonContext().getUsername();
+        	int tenantId = CarbonContext.getThreadLocalCarbonContext().getTenantId();
+        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry(userName,tenantId);
         	if(tenantGovReg == null){
     			throw new IdentityApplicationManagementException(" Registry can't be null ");
     		}
@@ -243,7 +245,9 @@ public class ApplicationMgtOSGIUtil {
         applicationNode = getApplicationPermissionPath() + PATH_CONSTANT + applicationName;
 
         try {        	
-        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry();        	
+        	String userName = CarbonContext.getThreadLocalCarbonContext().getUsername();
+        	int tenantId = CarbonContext.getThreadLocalCarbonContext().getTenantId();
+        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry(userName,tenantId);        	
         	if(tenantGovReg == null){
     			throw new IdentityApplicationManagementException(" Registry can't be null ");
     		}
@@ -318,7 +322,9 @@ public class ApplicationMgtOSGIUtil {
         applicationNode = getApplicationPermissionPath() + PATH_CONSTANT + applicationName;
     
         try {
-        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry();
+        	String userName = CarbonContext.getThreadLocalCarbonContext().getUsername();
+        	int tenantId = CarbonContext.getThreadLocalCarbonContext().getTenantId();
+        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry(userName,tenantId);
         	if(tenantGovReg == null){
     			throw new IdentityApplicationManagementException(" Registry can't be null ");
     		}
@@ -378,7 +384,9 @@ public class ApplicationMgtOSGIUtil {
         String applicationNode = getApplicationPermissionPath() + PATH_CONSTANT + applicationName;
         
         try {
-        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry();
+        	String userName = CarbonContext.getThreadLocalCarbonContext().getUsername();
+        	int tenantId = CarbonContext.getThreadLocalCarbonContext().getTenantId();
+        	Registry tenantGovReg = ApplicationManagementServiceComponentHolder.getRegistryService().getGovernanceUserRegistry(userName,tenantId);
         	if(tenantGovReg == null){
     			throw new IdentityApplicationManagementException(" Registry can't be null ");
     		}
